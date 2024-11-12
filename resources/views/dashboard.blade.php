@@ -11,6 +11,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
    <h1>hello</h1>
+   <h2>testcommit</h2>
                 </div>
             </div>
         </div>
