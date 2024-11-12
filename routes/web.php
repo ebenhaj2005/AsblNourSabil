@@ -22,6 +22,9 @@ Route::get('/account', function() {
     return view('account');
 })->name('account');
     
+Route::get('/test', function() {
+    return view('test');
+})->name('test');
 
 
 

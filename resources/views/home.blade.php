@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Nour Sabil</title>
-    <link rel="stylesheet" href="css/index.css">
-</head>
-<body>
-@include('components.header')
+
+@extends('layouts.basic')
+@section('title', 'Home - Nour Sabil')
+
+@section('content')
 
 <div id="kidimg">
 <div id="imgtxt"></div>
@@ -67,10 +62,7 @@ Grâce aux dons et au soutien de leurs bénévoles.</p>
         </div>
         </div>
 
+        @include('components.newsletter')
 
 
-
-@include('components.newsletter')
-@include('components.footer')
-</body>
-</html>
+@endsection

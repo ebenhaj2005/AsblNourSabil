@@ -1,3 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title')</title>
+    <link rel="icon" href="images/images (1).jpg">
+    <link rel="stylesheet" href="css/index.css">
+  @yield('css')
+   
+</head>
+<body>
+<div class="headerinfo">
+    <p>+32 488 38 20 70</p>
+    <p>|</p>
+    <p>info@asblnoursabil.com</p>
+
+</div>
+
+<div class="header" >
+ 
+        <img id='logo' src="images/images (1).jpg" alt="logo" width="100px">
+
+
+       
+            <a href="/home">Accueil</a>
+            <p>|</p>
+            <a href="/galerie">Galerie</a>
+            <p>|</p>
+            <a href="/contact">Contact</a>
+            <p>|</p>
+            <a href="/account">Compte</a>
+
+            <button id="donation">Faire un don</button>
+       
+   
+
+
+
+
+
+</div>
+<main>
+@yield('content')
+
+</main>
+
+
 <hr>
 
    <footer>
@@ -13,7 +61,7 @@
           
          <h1 > <a id="desctitle" href="/home">Accueil</a></h1>
             <p><a href="/home">Faire un don</a></p>
-            <p><a href="#nosservices">Nos Services</a></p>
+            <p><a href="/home">Nos Services</a></p>
             <p><a href="/home">Newsletter</a></p>
         </div>
         <div class="pagedesc">
@@ -34,10 +82,10 @@
         </div>
         <div class="pagedesc">
            
-           <h1> <a id="desctitle" href="/Galerie">Account</a></h1>
-            <p><a href="/contact">textetxte</a></p>
-            <p><a href="/contca">textetxte</a></p>
-            <p><a href="/Galerie"></a>textetxte</p>
+           <h1> <a id="desctitle" href="/account">Account</a></h1>
+            <p><a href="/account">textetxte</a></p>
+            <p><a href="/account">textetxte</a></p>
+            <p><a href="/account">textetxte</a></p>
 
         </div>
 
@@ -49,3 +97,5 @@
 echo "© " . date("Y") . " ASBL Nour Sabil. All rights reserved.";
 ?>
 </div>
+</body>
+</html>
