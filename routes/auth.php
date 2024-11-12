@@ -58,10 +58,3 @@ Route::middleware('auth')->group(function () {
         ->name('logout');
 });
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
-
-Route::get('/galerie', function () {
-    return view('galerie');
-})->name('galerie');

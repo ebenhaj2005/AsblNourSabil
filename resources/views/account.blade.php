@@ -6,16 +6,13 @@
     <title>Galerie - Nour Sabil</title>
     <link rel="icon" href="images/images (1).jpg">
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/galerie.css">
+    <link rel="stylesheet" href="css/account.css">
 
 </head>
 <body>
 @include('components.header')
 
 
-<h1 id="galerie-title">Galerie</h1>
-
-<div id="galerie">
 
 
 

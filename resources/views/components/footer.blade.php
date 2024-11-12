@@ -14,30 +14,30 @@
          <h1 > <a id="desctitle" href="/home">Accueil</a></h1>
             <p><a href="/home">Faire un don</a></p>
             <p><a href="#nosservices">Nos Services</a></p>
-            <p><a href="/home">Lettre d'Information</a></p>
+            <p><a href="/home">Newsletter</a></p>
         </div>
         <div class="pagedesc">
             <h1> <a id="desctitle" href="/galerie">Galerie</a></h1>
-            <p><a href="/galerie">Galerie</a></p>
-            <p><a href="/galerie">Lettre d'Information</a></p>
-            <p><a href="/galerie">Contact</a></p>
+            <p><a href="/galerie">Puits</a></p>
+            <p><a href="/galerie">Ecoles</a></p>
+            <p><a href="/galerie">Newsletter</a></p>
   
 
         </div>
         <div class="pagedesc">
            
-           <h1> <a id="desctitle" href="/Galerie">A Propos de nous</a></h1>
-            <p><a href="/Galerie">Galerie</a></p>
-            <p><a href="/Galerie">A propos de nous</a></p>
-            <p><a href="/Galerie">Contact</a></p>
+           <h1> <a id="desctitle" href="/contact">Contact</a></h1>
+            <p><a href="/contact">Membres</a></p>
+            <p><a href="/contact">Reseaux Sociaux</a></p>
+            <p><a href="/contact">Newsletter</a></p>
 
         </div>
         <div class="pagedesc">
            
-           <h1> <a id="desctitle" href="/Galerie">Contact</a></h1>
-            <p><a href="/Galerie">Galerie</a></p>
-            <p><a href="/Galerie">A propos de nous</a></p>
-            <p><a href="/Galerie">Contact</a></p>
+           <h1> <a id="desctitle" href="/Galerie">Account</a></h1>
+            <p><a href="/contact">textetxte</a></p>
+            <p><a href="/contca">textetxte</a></p>
+            <p><a href="/Galerie"></a>textetxte</p>
 
         </div>
 

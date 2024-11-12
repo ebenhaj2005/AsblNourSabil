@@ -13,10 +13,6 @@
 @include('components.header')
 
 
-<h1 id="galerie-title">Galerie</h1>
-
-<div id="galerie">
-
 
 
 
