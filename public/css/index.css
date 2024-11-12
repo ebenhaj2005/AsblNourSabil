@@ -1,0 +1,317 @@
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.headerinfo {
+    display: flex;
+    flex-direction: row;
+    background-color: #8fc93c;
+    justify-content: space-evenly;
+color: white;
+font-weight: bold;
+letter-spacing: 2px;
+padding: 10px;
+}
+
+.header a {
+    color: black;
+    text-decoration: none;
+    font-size: 30px;
+    margin-top: 30px;
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+}
+.header p {
+    color: black;
+
+    font-size: 30px;
+    margin-top: 30px;
+}
+.header a:hover {
+    scale: 1.1;
+    
+}
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+
+}
+#donation {
+    font-size: 20px;
+    color: white;
+    background-color: #8fc93c;
+    border-color: white;
+    border-width: 0px;
+margin-top: 15px;
+margin-bottom: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 90px;
+}
+#donation:hover {
+    scale: 1.1;
+    cursor:pointer;
+}
+#kidimg{
+    background-image: url('../images/ASBLNourAlAndalous.png');
+    background-size:100%;
+    background-repeat: no-repeat;
+    margin-bottom: 100px;
+}
+
+#kidimg p{
+font-size: 30px;
+color: white;
+letter-spacing: 2px;
+padding-left: 20rem;
+padding-top: 400px;
+}
+#kidimg h1{
+    font-size: 110px;
+
+    color: white;
+    padding-left: 20rem;
+    letter-spacing: 2px;
+font-family: 'Times New Roman', Times, serif;
+    }
+    
+
+    #donation2 {
+        font-size: 40px;
+        color: white;
+        background-color: #8fc93c;
+        border-color: white;
+        border-width: 0px;
+    margin-top: 100px;
+    margin-bottom: 300px;
+        padding-left: 70px;
+        padding-right: 70px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-radius: 70px;
+       
+        font-family:Georgia, 'Times New Roman', Times, serif;
+    }
+    #donation2:hover {
+        scale: 1.1;
+        cursor:pointer;
+    }
+    #donationbutt{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    #servicetitle{
+        display: flex;
+        flex-direction: column;
+
+        text-align: center;
+        font-size: 60px;
+        font-weight: bold;
+        font-family: 'Times New Roman', Times, serif;
+        margin-bottom: 100px;
+    }
+    #text1{
+color: #8fc93c;
+
+    }
+    
+
+ #services{
+    background-color: #8fc93c;
+    padding: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-top: 100px;
+    padding-bottom: 100px;
+ }
+ #textbox{
+    background-color: white;
+    color:black;
+    padding: 20px;
+    border-radius: 20px;
+    width: 30%;
+    text-align: center;
+
+
+ }
+ #textbox h1{
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    padding-bottom: 30px;
+ }
+
+    #textbox p{
+        padding-top: 60px;
+        font-size: 25px;
+        font-family: 'Times New Roman', Times, serif;
+
+    }
+ #serviceimg img{
+    border-radius: 20px;
+ }
+  #services2{
+    background-color: white;
+    padding: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-top: 100px;
+    padding-bottom: 100px;
+ }
+ #textbox2{
+    background-color: #8fc93c;
+    color:white;
+    padding: 20px;
+    border-radius: 20px;
+    width: 30%;
+    text-align: center;
+
+
+ }
+ #textbox2 h1{
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    padding-bottom: 30px;
+ }
+
+    #textbox2 p{
+        padding-top: 60px;
+        font-size: 25px;
+        font-family: 'Times New Roman', Times, serif;
+
+    text-align: justify;
+
+
+    }
+ #serviceimg img{
+    border-radius: 20px;
+ }
+
+ #newsletter{
+    margin-top: 200px;
+    margin-bottom: 200px;
+ }
+ #newstitle{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+margin-bottom: 20px;
+
+ }
+ .greentext{
+    color: #8fc93c;
+ }
+ #textnews{
+   color:black;
+    text-align: center;
+    margin-bottom: 100px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+ }
+
+#newsinput{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 100px;
+
+}
+#newsinput input{
+    padding: 30px;
+    border-color: #8fc93c #8fc93c #8fc93c #8fc93c;
+    border-width: 10px;
+
+    width: 500px;
+    font-size: 20px;
+    text-align: center;
+  
+}
+#newsinput button{
+    padding: 30px;
+    background-color: #8fc93c;
+    border-color: #8fc93c #8fc93c #8fc93c #8fc93c;  
+    color: white;
+    border-width: 2px;
+    font-size: 20px;
+ 
+
+}
+
+footer{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-bottom: 50px;
+
+
+}
+#footer-logo{
+    display: flex;
+    flex-direction: column;
+   
+
+color:#8fc93c;
+
+}
+#footer-logo img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    margin-left: 60px;
+}
+.pagedesc{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-right: 20px;
+    margin-top: 30px;
+}
+.pagedesc a{
+  
+    line-height: 40px;
+  color: black;
+    text-decoration: none;
+    font-size: 20px;
+}
+#desctitle{
+    font-size: 30px;
+    color: #8fc93c;
+
+
+}
+.pagedesc h1{
+
+    font-size: 30px;
+}
+.pagedesc a:hover{
+    color: #8fc93c;
+}
+#pages{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
+#lasthr{
+    margin-bottom: 20px;
+}
+#copyright{
+    text-align: center;
+    margin-bottom: 10px;
+    color: #D9D9D9;
+}
