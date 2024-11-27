@@ -12,7 +12,14 @@
 <body>
 <div class="headerinfo">
     <p>+32 488 38 20 70</p>
-    <p>|</p>
+    <p>
+    <?php if (Auth::check()) { ?>
+        <p class="welcome">Bienvenue <?php echo Auth::user()->name; ?></p>
+    <?php } else { ?>
+        <p class="welcome">Bienvenue Chez l'Asbl Nour Sabil</p>
+    <?php } ?>
+    </p>
+
     <p>info@asblnoursabil.com</p>
 
 </div>
@@ -31,7 +38,13 @@
             <p>|</p>
             <a href="/account">Compte</a>
 
-            <button id="donation">Faire un don</button>
+            <button id="donation"><?php if(Auth::check()){
+                echo Auth::user()->name;
+      
+            }else{
+                echo "Login";
+   
+            }    ?></button>
        
    
 

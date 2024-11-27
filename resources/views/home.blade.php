@@ -6,6 +6,8 @@
 
 <div id="kidimg">
 <div id="imgtxt"></div>
+
+
   <p>Besoin d'aide...</p>
   <h1 >Chaque Geste Compte</h1>
   <h1 id="imgtit1">Pour Faire La Difference</h1>
