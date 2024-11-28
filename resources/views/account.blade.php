@@ -10,7 +10,7 @@
 @section('content')
 
 
-    <h1 id="accountname">Elias Benhaj</h1>
+    <h1 id="accountname">{{ Auth::user()->name }} {{ Auth::user()->surname }}</h1>
  <img src="images/puit.jpg" alt="" id="pfp">
 <div id="accbutt">
     <a href="/profile"><button class="accountbutton">Sign in & Security</button></a>

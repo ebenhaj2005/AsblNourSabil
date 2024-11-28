@@ -1,7 +1,8 @@
 <?php
-
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('home');
@@ -25,19 +26,9 @@ Route::get('/contact', function () {
 Route::get('/account', function() {
 
         return view('account');
- } )->name('account') ;
+ } )->middleware(['auth'])->name('account') ;
     
-Route::get('/test', function() {
-    return view('test');
-})->name('test');
 
-Route::get('register', function() {
-    return view('test2');
-})->name('test2');
-
-Route::get('dashboard', function() {
-    return view('login');
-})->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {

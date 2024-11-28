@@ -38,13 +38,27 @@
             <p>|</p>
             <a href="/account">Compte</a>
 
-            <button id="donation"><?php if(Auth::check()){
-                echo Auth::user()->name;
-      
-            }else{
-                echo "Login";
-   
-            }    ?></button>
+    <button id="donation"><?php if(Auth::check()){
+                    echo Auth::user()->name;
+          
+                }else{
+                    echo "Login";
+                }    ?></button>
+    
+    <script>
+        if (!<?php echo Auth::check() ? 'true' : 'false'; ?>) {
+            document.getElementById("donation").addEventListener("click", function(){
+                window.location.href = "login";
+            });
+        }
+    else{
+        document.getElementById("donation").addEventListener("click", function(){
+                window.location.href = "account";
+            });
+    }
+    </script>
+
+           
        
    
 
