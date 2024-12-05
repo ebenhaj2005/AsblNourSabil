@@ -209,6 +209,7 @@ color: #8fc93c;
     font-size: 30px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 margin-bottom: 20px;
+margin-top: 200px;
 
  }
  .greentext{
@@ -225,7 +226,7 @@ margin-bottom: 20px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-bottom: 100px;
+    margin-bottom: 200px;
 
 }
 #newsinput input{
