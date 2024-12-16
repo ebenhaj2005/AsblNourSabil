@@ -39,7 +39,7 @@
             <a href="/account">Compte</a>
 
     <button id="donation"><?php if(Auth::check()){
-                    echo Auth::user()->name;
+               echo   Auth::user()-> username;
           
                 }else{
                     echo "Login";

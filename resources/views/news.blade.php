@@ -9,7 +9,6 @@
 
 
 
-        @include('components.newsletter')
-
+extends('layouts.newsletter')
 
 @endsection

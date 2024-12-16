@@ -64,7 +64,6 @@ Grâce aux dons et au soutien de leurs bénévoles.</p>
         </div>
         </div>
 
-        @include('components.newsletter')
-
+       @include('components.newsletter')
 
 @endsection
