@@ -23,11 +23,9 @@ Route::get('/contact', function () {
 })->name('contact');
 
 
-Route::get('/account', function() {
-
-        return view('account');
- } )->middleware(['auth'])->name('account') ;
+Route::get('/account', [AccountController::class, 'showProfile']) ->middleware(['auth'])->name('account') ;
     
+
 
 
 
