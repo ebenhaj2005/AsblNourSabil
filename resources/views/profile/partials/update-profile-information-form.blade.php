@@ -17,22 +17,37 @@
         @csrf
         @method('patch')
 
+        <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
+        <!-- Surname -->
+        <div>
+            <x-input-label for="surname" :value="__('Surname')" />
+            <x-text-input id="surname" name="surname" type="text" class="mt-1 block w-full" :value="old('surname', $user->surname)" required autocomplete="surname" />
+            <x-input-error class="mt-2" :messages="$errors->get('surname')" />
+        </div>
+
+        <!-- Username -->
+        <div>
+            <x-input-label for="username" :value="__('Username')" />
+            <x-text-input id="username" name="username" type="text" class="mt-1 block w-full" :value="old('username', $user->username)" required autocomplete="username" />
+            <x-input-error class="mt-2" :messages="$errors->get('username')" />
+        </div>
+
+        <!-- Email -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
-
+            
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
                         {{ __('Your email address is unverified.') }}
-
                         <button form="send-verification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
                             {{ __('Click here to re-send the verification email.') }}
                         </button>
@@ -45,6 +60,23 @@
                     @endif
                 </div>
             @endif
+        </div>
+
+        <!-- Profile Visibility -->
+        <div>
+            <x-input-label for="visibility" :value="__('Profile Visibility')" />
+            <div class="flex items-center gap-4">
+                <label for="visibility_username" class="inline-flex items-center">
+                    <input type="radio" id="visibility_username" name="visibility" value="username" class="mr-2" @checked(old('visibility', $user->visibility) == 'username') />
+                    {{ __('Display Username') }}
+                </label>
+
+                <label for="visibility_name_surname" class="inline-flex items-center">
+                    <input type="radio" id="visibility_name_surname" name="visibility" value="name_surname" class="mr-2" @checked(old('visibility', $user->visibility) == 'name_surname') />
+                    {{ __('Display Name and Surname') }}
+                </label>
+            </div>
+            <x-input-error class="mt-2" :messages="$errors->get('visibility')" />
         </div>
 
         <div class="flex items-center gap-4">

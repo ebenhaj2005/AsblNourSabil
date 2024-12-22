@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
     <link rel="icon" href="images/images (1).jpg">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
   @yield('css')
    
 </head>
@@ -25,8 +25,8 @@
 </div>
 
 <div class="header" >
- 
-        <img id='logo' src="images/images (1).jpg" alt="logo" width="100px">
+
+        <img id='logo' src="{{ asset('images/images (1).jpg') }}" alt="logo" width="100px">
 
 
        
@@ -77,7 +77,7 @@
 
    <footer>
     <div id="footer-logo">
-        <img src="images/images (1).jpg" alt="logo" width="100px">
+        <img src="{{ asset('images/images (1).jpg') }}" alt="logo" width="100px">
         <h1>ASBL NOUR SABIL</h1>
        
     </div>

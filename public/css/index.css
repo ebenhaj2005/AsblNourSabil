@@ -317,3 +317,21 @@ color:#8fc93c;
     margin-bottom: 10px;
     color: black;
 }
+#profilename{
+    font-size: 30px;
+    color: #8fc93c;
+}
+.container2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+#bio{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+}

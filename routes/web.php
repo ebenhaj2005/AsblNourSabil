@@ -35,7 +35,7 @@ Route::post('/contact', [ContactController::class, 'submitContactForm'])->name('
 Route::get('/login', function () {
     return view('login');
 })->name('login');
-
+Route::get('/user/{username}', [ProfileController::class, 'showPublicProfile']);
 
 Route::get('/galerie', function () {
     return view('galerie');
