@@ -54,9 +54,9 @@ Route::get('/login', function () {
 })->name('login');
 Route::get('/user/{username}', [ProfileController::class, 'showPublicProfile']);
 
-Route::get('/galerie', function () {
-    return view('galerie');
-})->name('galerie');
+Route::get('/news', function () {
+    return view('news');
+})->name('news');
 
 Route::get('/account', [AccountController::class, 'showProfile'])->middleware('auth');
     

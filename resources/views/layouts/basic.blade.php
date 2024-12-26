@@ -32,7 +32,7 @@
        
             <a href="/home">Accueil</a>
             <p>|</p>
-            <a href="/galerie">Nouveautés</a>
+            <a href="/news">Nouveautés</a>
             <p>|</p>
             <a href="/contact">Contact</a>
             <p>|</p>

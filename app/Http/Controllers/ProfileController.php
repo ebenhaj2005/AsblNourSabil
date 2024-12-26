@@ -18,17 +18,31 @@ class ProfileController extends Controller
      */
 
      public function showPublicProfile($username)
-     {
-         $user = User::where('username', $username)->firstOrFail();
-     
-         if ($user->visibility === 'name_surname') {
-             $profileName = $user->name . ' ' . $user->surname;
-         } else {
-             $profileName = $user->username;
-         }
-     
-         return view('public', ['user' => $user, 'profileName' => $profileName]);
-     }
+    {
+        // Retrieve the user by username or fail if not found
+        $user = User::where('username', $username)->first();
+        
+        // Check if user is found
+        if (!$user) {
+           abort(404, 'User not found');
+        }
+    
+        // Determine the profile name based on visibility settings
+        if ($user->visibility === 'name_surname') {
+           $profileName = $user->name . ' ' . $user->surname;
+        } else {
+           $profileName = $user->username;
+        }
+        dd($request->all());
+        $user->bio = $request->input('bio');
+    
+        // Return the view with the user data, profile name, and bio
+        return view('public', [
+           'user' => $user, 
+           'profileName' => $profileName,
+           'bio' => $user->bio
+        ]);
+    }
 
     public function edit(Request $request): View
     {
@@ -56,7 +70,8 @@ class ProfileController extends Controller
                     'required',
                     'string',
                     'max:255',
-                    'unique:users,username,' . $user->id, // Exclude the current user from uniqueness check
+                    'unique:users,username,' . $user->id, // Exclude the current user from uniqueness check 
+                    
                 ],
             ]);
         }
@@ -70,7 +85,7 @@ class ProfileController extends Controller
         if ($request->user()->isDirty('email')) {
             $user->email_verified_at = null;
         }
-
+      
         // Save the updated user data
         $user->save();
 

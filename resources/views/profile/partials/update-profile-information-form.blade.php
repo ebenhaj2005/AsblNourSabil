@@ -38,6 +38,13 @@
             <x-input-error class="mt-2" :messages="$errors->get('username')" />
         </div>
 
+
+        <div>
+    <x-input-label for="bio" :value="__('About Me')" />
+    <x-text-input id="bio" name="bio" type="textarea" class="mt-1 block w-full" :value="old('bio', $user->bio)" required autocomplete="bio" />
+    <x-input-error class="mt-2" :messages="$errors->get('bio')" />
+</div>
+      
         <!-- Email -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
