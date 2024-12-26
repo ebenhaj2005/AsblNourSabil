@@ -6,26 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('newsitems', function (Blueprint $table) {
-         $table->increments('id');
-         $table->string('title');
+            $table->id();
+            $table->string('title');
             $table->text('content');
-            $table->string('image');
+            $table->string('picture')->nullable();
+            $table->dateTime('publication_date');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
-
+        
+            // Foreign key constraint
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('newsitems');
     }
 };

@@ -7,15 +7,32 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\NewsItemController;
 
 
-Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+//Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
-Route::middleware(['auth', 'admin'])->group(function () {
+/*Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users');
     Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
     Route::patch('/admin/users/{id}/make-admin', [AdminController::class, 'makeAdmin'])->name('admin.makeAdmin');
-});
+});*/
+
+
+
+
+Route::post('/admin/newsitems/store', [NewsController::class, 'store'])->name('admin.newsitems.store');
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+})->name('admin.dashboard');
+
+Route::get('/admin/newsitems', function () {
+    return view('admin.newsitems');
+})->name('admin.newsitems');
+
+Route::get('/admin/newsitems/store', function () {
+    return view('admin.newsitems.store');
+})->name('admin.newsitems.store');
 // GOEDE ROUTES
 Route::get('/home', function () {
 

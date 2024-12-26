@@ -2,9 +2,9 @@
 
 @section('content')
 
-<h1 id='adminwelcome'>Bienvenue, <?php echo Auth::user()->name . ' ' . Auth::user()->surname; ?></h1>
-               
-            </header>
+<header>
+    <h1 id='adminwelcome'>Bienvenue, <?php echo Auth::user()->name . ' ' . Auth::user()->surname; ?></h1>
+</header>
 
  
             <section class="cards">
@@ -12,10 +12,11 @@
                     <h3>Users</h3>
                     <p>Manage users and their roles.</p>
                 </div>
-                <div class="card">
-                    <h3>Statistics</h3>
-                    <p>View application performance metrics.</p>
-                </div>
+                  <button id="newsitemcard"> <div class="card" >
+                 
+                    <h3>News items</h3>
+                    <p>Add news items</p>
+                </div></button>
                 <div class="card">
                     <h3>Settings</h3>
                     <p>Update application settings.</p>
@@ -25,10 +26,10 @@
 
 
 
- @endsection
-
  <script>
-document.getElementById("usercard").addEventListener("click", function(){
-    window.location.href = "users";
+document.getElementById("newsitemcard").addEventListener("click", function(){
+    window.location.href = "/admin/newsitems"; 
 });
- </script>
+</script>
+
+ @endsection
