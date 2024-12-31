@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('newsitems', function (Blueprint $table) {
+        Schema::create('news_items', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('content');
@@ -21,4 +21,12 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
+
+
+    public function down()
+    {
+        Schema::dropIfExists('news_items');
+    }
 };
+
+

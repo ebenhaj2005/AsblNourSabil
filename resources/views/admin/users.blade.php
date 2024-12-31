@@ -35,18 +35,20 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->is_admin ? 'Admin' : 'User' }}</td>
                                 <td class="d-flex justify-content-between">
-                                    <form action="{{ route('admin.deleteUser', $user->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                    </form>
-
-                                    @if (!$user->is_admin)
+                                    <div class="mr-2">
+                                        <form action="{{ route('admin.deleteUser', $user->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </div>
+                                    <div>
                                         <form action="{{ route('admin.makeAdmin', $user->id) }}" method="POST">
                                             @csrf
                                             <button type="submit" class="btn btn-primary btn-sm">Make Admin</button>
                                         </form>
-                                    @endif
+                                    </div>
+                              
                                 </td>
                             </tr>
                         @endforeach

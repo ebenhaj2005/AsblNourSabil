@@ -24,8 +24,14 @@ class AdminController extends Controller
         $user->delete();
         return redirect()->route('admin.users')->with('success', 'User deleted successfully.');
     }
-    public function makeAdmin(User $user)
+    public function makeAdmin($id)
     {
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->route('admin.users')->with('error', 'User not found.');
+        }
+
         if (!$user->name) {
             return redirect()->route('admin.users')->with('error', 'User must have a name.');
         }
