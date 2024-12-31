@@ -14,9 +14,9 @@
             <h2>Admin Panel</h2>
             <nav>
                 <ul>
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Users</a></li>
-                    <li><a href="#">Blacklist</a></li>
+                    <li><a href="../admin/dashboard">Dashboard</a></li>
+                    <li><a href="../admin/users">Users</a></li>
+                    <li><a href="../admin/blacklist">Blacklist</a></li>
                     <li><a href="#">Settings</a></li>
                     <li><a href="#">Logout</a></li>
                 </ul>

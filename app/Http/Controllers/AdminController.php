@@ -10,20 +10,29 @@ class AdminController extends Controller
     {
         $users = User::all();
         return view('admin.users', compact('users'));
+        
     }
 
     public function deleteUser($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->route('admin.users')->with('error', 'User not found.');
+        }
+
         $user->delete();
         return redirect()->route('admin.users')->with('success', 'User deleted successfully.');
     }
-
-    public function makeAdmin($id)
+    public function makeAdmin(User $user)
     {
-        $user = User::findOrFail($id);
-        $user->is_admin = true;
+        if (!$user->name) {
+            return redirect()->route('admin.users')->with('error', 'User must have a name.');
+        }
+        
+        $user->role = 'admin';
         $user->save();
         return redirect()->route('admin.users')->with('success', 'User promoted to admin.');
     }
+    
 }

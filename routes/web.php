@@ -17,9 +17,10 @@ use App\Http\Controllers\NewsItemController;
     Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
     Route::patch('/admin/users/{id}/make-admin', [AdminController::class, 'makeAdmin'])->name('admin.makeAdmin');
 });*/
-
-
-
+Route::post('/admin/make-admin/{id}', [AdminController::class, 'makeAdmin'])->name('admin.makeAdmin');
+Route::post('/admin/make-admin/{user}', [AdminController::class, 'makeAdmin'])->name('admin.makeAdmin');
+Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users');
+Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
 
 Route::post('/admin/newsitems/store', [NewsController::class, 'store'])->name('admin.newsitems.store');
 Route::get('/admin/dashboard', function () {
@@ -68,6 +69,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
 });
 
 

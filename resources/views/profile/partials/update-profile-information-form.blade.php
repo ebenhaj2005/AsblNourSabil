@@ -38,13 +38,28 @@
             <x-input-error class="mt-2" :messages="$errors->get('username')" />
         </div>
 
-
+        <!-- Bio -->
         <div>
     <x-input-label for="bio" :value="__('About Me')" />
     <x-text-input id="bio" name="bio" type="textarea" class="mt-1 block w-full" :value="old('bio', $user->bio)" required autocomplete="bio" />
     <x-input-error class="mt-2" :messages="$errors->get('bio')" />
 </div>
-      
+
+
+    <!-- Birthday -->
+    <div>
+        <x-input-label for="birthday" :value="__('Birthday')" />
+        <x-text-input id="birthday" name="birthday" type="date" class="mt-1 block w-full" :value="old('birthday', $user->birthday)" required autocomplete="birthday" />
+        <x-input-error class="mt-2" :messages="$errors->get('birthday')" />
+    </div>
+
+    <!-- Profile Picture -->
+    <div>
+        <x-input-label for="profile_picture" :value="__('Profile Picture')" />
+        <input id="profile_picture" name="profile_picture" type="file" class="mt-1 block w-full" accept="image/*" />
+        <x-input-error class="mt-2" :messages="$errors->get('profile_picture')" />
+    </div>
+
         <!-- Email -->
         <div>
             <x-input-label for="email" :value="__('Email')" />

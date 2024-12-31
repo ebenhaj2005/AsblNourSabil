@@ -11,13 +11,14 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\User;
 
+
 class ProfileController extends Controller
 {
     /**
      * Display the user's profile form.
      */
 
-     public function showPublicProfile($username)
+     public function showPublicProfile(Request $request, $username)
     {
         // Retrieve the user by username or fail if not found
         $user = User::where('username', $username)->first();
@@ -33,8 +34,8 @@ class ProfileController extends Controller
         } else {
            $profileName = $user->username;
         }
-        dd($request->all());
-        $user->bio = $request->input('bio');
+       
+        $user->bio = $user->bio ?? 'No bio provided';
     
         // Return the view with the user data, profile name, and bio
         return view('public', [
@@ -49,6 +50,7 @@ class ProfileController extends Controller
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
+     
     }
 
     /**
@@ -56,42 +58,27 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $user = $request->user();
+        $user = Auth::user();
 
-        // Validate the visibility field
-        $request->validate([
-            'visibility' => ['required', 'in:username,name_surname'],
-        ]);
-
-        // Check if the username is changed and validate it for uniqueness
-        if ($request->input('username') !== $user->username) {
-            $request->validate([
-                'username' => [
-                    'required',
-                    'string',
-                    'max:255',
-                    'unique:users,username,' . $user->id, // Exclude the current user from uniqueness check 
-                    
-                ],
-            ]);
-        }
-
-        
-
-        // Fill the validated data (including username, email, visibility, etc.)
-        $user->fill($request->validated());
-
-        // If email is changed, reset the verified_at field
-        if ($request->user()->isDirty('email')) {
-            $user->email_verified_at = null;
-        }
       
-        // Save the updated user data
+        $user->name = $request->input('name');
+        $user->surname = $request->input('surname');
+        $user->username = $request->input('username');
+        $user->bio = $request->input('bio'); 
+        if ($request->hasFile('profile_picture')) {
+            $file = $request->file('profile_picture');
+            $path = $file->store('profile_pictures', 'public');
+            $user->profile_picture = $path;
+        }
+        $user->birthday = $request->input('birthday');
+    $user->visibility = $request->input('visibility');
+      
         $user->save();
 
-        // Flash success message
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
+
+        
 
     /**
      * Delete the user's account.

@@ -18,12 +18,14 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'surname',
-        'username',  // This ensures 'username' can be mass-assigned
+        'username', 
         'email',
         'password',
-        'is_admin',
         'bio',
         'profile_photo_path',
+        'visibility', 
+        'role',
+        'birthday',
     ];
 
     /**

@@ -3,7 +3,7 @@
 @section('content')
 
 <header>
-    <h1 id='adminwelcome'>Bienvenue, <?php echo Auth::user()->name . ' ' . Auth::user()->surname; ?></h1>
+    <h1 id='adminwelcome'>Bienvenue, <?php if(Auth::check()) { echo Auth::user()->name . ' ' . Auth::user()->surname; } ?></h1>
 </header>
 
  
