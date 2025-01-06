@@ -18,13 +18,31 @@ use App\Http\Controllers\NewsController;
 
 
 
-Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
-    Route::resource('newsitems', NewsController::class);
+
+// Admin Routes
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    // Route to list all news items
+    Route::get('/newsitems', [NewsController::class, 'index'])->name('newsitems');
+
+    // Route to create a new news item
+    Route::get('/newsitems/create', [NewsController::class, 'create'])->name('newsitems.create');
+
+    // Route to store a new news item
+    Route::post('/newsitems', [NewsController::class, 'store'])->name('newsitems.store');
+
+    // Route to edit a news item
+    Route::get('/newsitems/{newsItem}/edit', [NewsController::class, 'edit'])->name('newsitems.edit');
+
+    // Route to update a news item
+    Route::put('/newsitems/{newsItem}', [NewsController::class, 'update'])->name('newsitems.update');
+
+    // Route to delete a news item
+    Route::delete('/newsitems/{newsItem}', [NewsController::class, 'destroy'])->name('newsitems.destroy');
 });
 
-Route::delete('/admin/deleteUser/{id}', [UserController::class, 'deleteUser'])->name('admin.deleteUser');
-Route::get('/admin/createuser', [RegisteredUserController::class, 'create'])
-->name('createuser');
+
+
+
 Route::post('register', [RegisteredUserController::class, 'store']);
 
 Route::post('/admin/makeAdmin/{id}', [AdminController::class, 'makeAdmin'])->name('admin.makeAdmin');
@@ -43,7 +61,9 @@ Route::get('/home', function () {
 
 })->name('home');
 
-Route::get('/news', [NewsController::class, 'index'])->name('news');
+Route::get('/news', [NewsController::class, 'showUserNews'])->name('news.index');
+
+
 
 Route::get('/', function () {
     return view('home');
@@ -57,9 +77,7 @@ Route::get('/login', function () {
 })->name('login');
 Route::get('/user/{username}', [ProfileController::class, 'showPublicProfile']);
 
-Route::get('/news', function () {
-    return view('news');
-})->name('news');
+
 
 Route::get('/account', [AccountController::class, 'showProfile'])->middleware('auth');
     

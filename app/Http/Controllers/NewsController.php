@@ -4,83 +4,115 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Newsitem;
+use App\Models\NewsItem;
 use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
+    // Admin: View all news items
     public function index()
     {
-        $newsitems = Newsitem::all();
+        // Fetch all news items
+        $newsitems = NewsItem::all();
+
+        // Pass the data to the view
         return view('admin.newsitems', compact('newsitems'));
     }
 
+    public function showUserNews(NewsItem $newsItem)
+    {
+        $newsItems = NewsItem::all(); 
+        return view('news', compact('newsItems'));
+    }
+
+    // Admin: Form for creating a new news item
     public function create()
     {
-        return view('admin.newsitems.create');
+        return view('admin.create');
     }
 
+    // Admin: Store new news item
     public function store(Request $request)
     {
+        // Validate the form data
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'title' => 'required|max:255',
+            'picture' => 'required|image|mimes:jpg,png,jpeg|max:2048',
+            'content' => 'required',
+            'publication_date' => 'required|date',
+        ]);
+    
+        // Get the authenticated user ID (if applicable)
+        $userId = auth()->id();  // Get the ID of the currently authenticated user
+    
+        // Upload the image
+        $imagePath = $request->file('picture')->store('images', 'public');
+    
+        // Create the news item with the user ID
+        NewsItem::create([
+            'title' => $validated['title'],
+            'image' => $imagePath,
+            'content' => $validated['content'],
+            'publication_date' => $validated['publication_date'],
+            'user_id' => $userId,  // Add the user ID here
+        ]);
+    
+        // Redirect with success message
+        return redirect()->route('admin.newsitems')->with('success', 'News item created successfully!');
+    }
+
+    // Admin: Show details of a news item
+    public function show(NewsItem $newsItem)
+    {
+        return view('admin.show', compact('newsItem'));
+    }
+
+    // Admin: Edit news item
+    public function edit(NewsItem $newsItem)
+    {
+        return view('admin.edit', compact('newsItem'));
+    }
+
+    // Admin: Update news item
+    public function update(Request $request, NewsItem $newsItem)
+    {
+        // Validate the form data
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'picture' => 'nullable|image|mimes:jpg,png,jpeg|max:2048', // Fixed 'image' to 'picture'
+            'content' => 'required',
             'publication_date' => 'required|date',
         ]);
 
-        $newsItem = new NewsItem($validated);
-
+        // Check for a new image upload
         if ($request->hasFile('picture')) {
-            $newsItem->picture = $request->file('picture')->store('news_pictures', 'public');
+            $imagePath = $request->file('picture')->store('images', 'public');
+            $newsItem->update(['image' => $imagePath]);
         }
 
-        $newsItem->save();
-
-        return redirect()->route('admin.newsitems.index')->with('success', 'News item created successfully.');
-    }
-
-    public function edit($id)
-    {
-        $newsitem = NewsItem::findOrFail($id);
-        return view('admin.newsitems.edit', compact('newsitem'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $newsitem = NewsItem::findOrFail($id);
-
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'picture' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
-            'publication_date' => 'required|date',
+        // Update the news item details
+        $newsItem->update([
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+            'publication_date' => $validated['publication_date'],
         ]);
 
-        $newsitem->fill($validated);
-
-        if ($request->hasFile('picture')) {
-            if ($newsitem->picture) {
-                Storage::disk('public')->delete($newsitem->picture);
-            }
-            $newsitem->picture = $request->file('picture')->store('news_pictures', 'public');
-        }
-
-        $newsitem->save();
-
-        return redirect()->route('admin.newsitems.index')->with('success', 'News item updated successfully.');
+        // Redirect with success message
+        return redirect()->route('admin.newsitems')->with('success', 'News item updated successfully!');
     }
 
-    public function destroy($id)
+    // Admin: Delete news item
+    public function destroy(NewsItem $newsItem)
     {
-        $newsitem = NewsItem::findOrFail($id);
-
-        if ($newsitem->picture) {
-            Storage::disk('public')->delete($newsitem->picture);
+        // Delete the image from storage if it exists
+        if ($newsItem->image && Storage::exists('public/' . $newsItem->image)) {
+            Storage::delete('public/' . $newsItem->image);
         }
 
-        $newsitem->delete();
+        // Delete the news item
+        $newsItem->delete();
 
-        return redirect()->route('admin.newsitems.index')->with('success', 'News item deleted successfully.');
+        // Redirect with success message
+        return redirect()->route('admin.newsitems')->with('success', 'News item deleted successfully!');
     }
 }

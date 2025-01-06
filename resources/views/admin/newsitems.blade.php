@@ -1,33 +1,56 @@
 @extends('layouts.admin')
+
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/form.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
+
 @endsection
 
 @section('content')
 
+<!-- Create News Item Form -->
+<h2>Create News Item</h2>
 
-
-<form action="{{ route('admin.newsitems.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('admin.newsitems.store') }}" method="POST" enctype="multipart/form-data" class="form-container">
     @csrf
-    <label for="title">Title:</label>
-    <input type="text" name="title" required>
     
-    <label for="content">Content:</label>
-    <textarea name="content" required></textarea>
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" name="title" value="{{ old('title') }}" required class="form-control">
+        @error('title')
+        <div class="error">{{ $message }}</div>
+        @enderror
+    </div>
 
-    <label for="picture">Picture:</label>
-    <input type="file" name="picture">
+    <div class="form-group">
+        <label for="content">Content:</label>
+        <textarea name="content" required class="form-control">{{ old('content') }}</textarea>
+        @error('content')
+        <div class="error">{{ $message }}</div>
+        @enderror
+    </div>
 
-    <label for="publication_date">Publication Date:</label>
-    <input type="datetime-local" name="publication_date" required>
+    <div class="form-group">
+        <label for="picture">Picture (Optional):</label>
+        <input type="file" name="picture" class="form-control">
+        @error('picture')
+        <div class="error">{{ $message }}</div>
+        @enderror
+    </div>
 
-    <button type="submit">Submit</button>
+    <div class="form-group">
+        <label for="publication_date">Publication Date:</label>
+        <input type="datetime-local" name="publication_date" value="{{ old('publication_date') }}" required class="form-control">
+        @error('publication_date')
+        <div class="error">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
-
-
+<!-- All News Items Table -->
 <h2>All News Items</h2>
-<table>
+<table class="table">
     <thead>
         <tr>
             <th>Title</th>
@@ -38,30 +61,31 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($newsitems as $newsitem)
+        @forelse($newsitems as $newsitem)
         <tr>
             <td>{{ $newsitem->title }}</td>
-            <td>{{ $newsitem->content }}</td>
+            <td>{{ Str::limit($newsitem->content, 50) }}</td>
             <td>
-                @if($newsitem->picture)
-                <img src="{{ asset('storage/' . $newsitem->picture) }}" alt="{{ $newsitem->title }}" width="100">
+                @if($newsitem->image)
+                <img src="{{ asset('storage/' . $newsitem->image) }}" alt="{{ $newsitem->title }}" width="100" class="img-thumbnail">
                 @endif
             </td>
-            <td>{{ $newsitem->publication_date }}</td>
+            <td>{{ \Carbon\Carbon::parse($newsitem->publication_date)->format('d-m-Y H:i') }}</td>
             <td>
-                <a href="{{ route('admin.newsitems.edit', $newsitem->id) }}">Edit</a>
+                <a href="{{ route('admin.newsitems.edit', $newsitem->id) }}" class="btn btn-warning btn-sm">Edit</a>
                 <form action="{{ route('admin.newsitems.destroy', $newsitem->id) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this news item?')">Delete</button>
                 </form>
             </td>
         </tr>
-        @endforeach
+        @empty
+        <tr>
+            <td colspan="5" class="text-center">No news items available.</td>
+        </tr>
+        @endforelse
     </tbody>
 </table>
-@endsection
-
-
 
 @endsection

@@ -33,7 +33,7 @@
                                 <td>{{ $user->id }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->is_admin ? 'Admin' : 'User' }}</td>
+                                <td>{{ $user->role === 'admin' ? 'Admin' : 'User' }}</td>
                                 <td class="d-flex justify-content-between">
                                     <div class="mr-2">
                                         <form action="{{ route('admin.deleteUser', $user->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?')">

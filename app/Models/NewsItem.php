@@ -10,13 +10,9 @@ class NewsItem extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id',
-        'title',
-        'content',
-        'picture',
-        'publication_date',
-        'user_id',
+     'title', 'image', 'content', 'publication_date'
     ];
+ 
 
     public function user()
     {
