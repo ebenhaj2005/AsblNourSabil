@@ -9,7 +9,9 @@
 
 @section('content')
     <h1 id="accountname">{{ Auth::user()->name }} {{ Auth::user()->surname }}</h1>
-    <h2 id="accountusername">{{ asset('storage/profile_pictures/' . Auth::user()->profile_picture) }}</h2>
+    <img id="accountusername" 
+     src="{{ Auth::user()->profile_picture ? asset('storage/profile_pictures/' . Auth::user()->profile_picture) : asset('images/default-profile.jpg') }}" 
+     alt="Profile Picture">
 
 <div id="accbutt">
     <a href="/profile"><button class="accountbutton">Sign in & Security</button></a>

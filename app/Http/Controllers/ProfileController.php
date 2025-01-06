@@ -72,7 +72,11 @@ class ProfileController extends Controller
         }
         $user->birthday = $request->input('birthday');
     $user->visibility = $request->input('visibility');
-      
+    if ($request->hasFile('profile_picture')) {
+        $file = $request->file('profile_picture');
+        $path = $file->store('profile_pictures', 'public');
+        $user->profile_picture = $path;
+    }
         $user->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');

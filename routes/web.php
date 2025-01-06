@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\CategoryController;
 //Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
 /*Route::middleware(['auth', 'admin'])->group(function () {
@@ -40,7 +42,12 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::delete('/newsitems/{newsItem}', [NewsController::class, 'destroy'])->name('newsitems.destroy');
 });
 
+Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 
+Route::middleware(['auth', 'can:manage-faq'])->group(function () {
+    Route::resource('categories', CategoryController::class);
+    Route::resource('faqs', FaqController::class)->except(['index']);
+});
 
 
 Route::post('register', [RegisteredUserController::class, 'store']);
@@ -48,6 +55,8 @@ Route::post('register', [RegisteredUserController::class, 'store']);
 Route::post('/admin/makeAdmin/{id}', [AdminController::class, 'makeAdmin'])->name('admin.makeAdmin');
 Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users');
 Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
+Route::get('/admin/users/create', [AdminController::class, 'create'])->name('admin.users.create');
+Route::post('/admin/users', [AdminController::class, 'store'])->name('admin.users.store');
 
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');

@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -40,5 +40,36 @@ class AdminController extends Controller
         $user->save();
         return redirect()->route('admin.users')->with('success', 'User promoted to admin.');
     }
+
     
-}
+  
+        public function create()
+        {
+            return view('admin.createuser');
+        }
+    
+        public function store(Request $request)
+        {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'surname' => 'required|string|max:255',
+                'username' => 'required|string|max:255|unique:users',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:8|confirmed',
+                'role' => 'required|in:user,admin',
+            ]);
+    
+            User::create([
+                'name' => $request->name,
+                'surname' => $request->surname,
+                'username' => $request->username,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => $request->role,
+            ]);
+    
+            return redirect()->route('admin.dashboard')->with('success', 'User created successfully.');
+        }
+    }
+    
+    

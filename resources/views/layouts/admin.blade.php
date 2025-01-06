@@ -16,7 +16,7 @@
                 <ul>
                     <li><a href="../admin/dashboard">Dashboard</a></li>
                     <li><a href="../admin/users">Users</a></li>
-                    <li><a href="../admin/createuser">Create User</a></li>
+                    <li><a href="../admin/users/create">Create User</a></li>
                     <li><a href="../admin/newsitems">News Items</a></li>
                     <li><a href="#">Logout</a></li>
                 </ul>

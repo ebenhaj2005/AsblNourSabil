@@ -76,29 +76,36 @@ class NewsController extends Controller
     // Admin: Update news item
     public function update(Request $request, NewsItem $newsItem)
     {
-        // Validate the form data
-        $validated = $request->validate([
-            'title' => 'required|max:255',
-            'picture' => 'nullable|image|mimes:jpg,png,jpeg|max:2048', // Fixed 'image' to 'picture'
-            'content' => 'required',
-            'publication_date' => 'required|date',
-        ]);
+        $user = Auth::user();
 
-        // Check for a new image upload
-        if ($request->hasFile('picture')) {
-            $imagePath = $request->file('picture')->store('images', 'public');
-            $newsItem->update(['image' => $imagePath]);
+    // Update the user's basic information
+    $user->name = $request->input('name');
+    $user->surname = $request->input('surname');
+    $user->username = $request->input('username');
+    $user->bio = $request->input('bio');
+    $user->birthday = $request->input('birthday');
+    $user->visibility = $request->input('visibility');
+
+    // Handle the profile picture upload
+    if ($request->hasFile('profile_picture')) {
+        // Delete the old profile picture from storage if it exists
+        if ($user->profile_picture && Storage::exists('public/' . $user->profile_picture)) {
+            Storage::delete('public/' . $user->profile_picture);
         }
 
-        // Update the news item details
-        $newsItem->update([
-            'title' => $validated['title'],
-            'content' => $validated['content'],
-            'publication_date' => $validated['publication_date'],
-        ]);
+        // Store the new profile picture
+        $file = $request->file('profile_picture');
+        $path = $file->store('profile_pictures', 'public');
 
-        // Redirect with success message
-        return redirect()->route('admin.newsitems')->with('success', 'News item updated successfully!');
+        // Update the user's profile picture path in the database
+        $user->profile_picture = $path;
+    }
+
+    // Save the updated user details
+    $user->save();
+
+    // Redirect back to the profile edit page with a success message
+    return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
     // Admin: Delete news item
