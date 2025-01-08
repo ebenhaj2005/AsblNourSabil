@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<h2>Create New News Item</h2>
+<h2>Create News Item</h2>
 
 <!-- Create News Item Form -->
 <form action="{{ route('admin.newsitems.store') }}" method="POST" enctype="multipart/form-data">

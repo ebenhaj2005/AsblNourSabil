@@ -21,6 +21,7 @@ class DefaultUserSeeder extends Seeder
                 'password' => Hash::make('Password123!'), // Secure password
                 'created_at' => now(),
                 'updated_at' => now(),
+                'role' => 'admin',
             ]
         );
     }

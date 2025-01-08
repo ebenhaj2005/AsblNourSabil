@@ -1,22 +1,29 @@
 <?php
 
+
 namespace App\Http\Controllers;
+
 use App\Models\Faq;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
 class FaqController extends Controller
 {
+    public function view()
+    {
+         $categories = Category::with('faqs')->get(); 
+        return view('contact', compact('categories'));
+    }
     public function index()
     {
-        $categories = Category::with('faqs')->get();
-        return view('faq.index', compact('categories'));
+      
+        return view('admin.faq', compact('categories'));
     }
 
     public function create()
     {
         $categories = Category::all();
-        return view('faq.create', compact('categories'));
+        return view('admin.createfaq', compact('categories'));
     }
 
     public function store(Request $request)
@@ -34,7 +41,7 @@ class FaqController extends Controller
     public function edit(Faq $faq)
     {
         $categories = Category::all();
-        return view('faq.edit', compact('faq', 'categories'));
+        return view('admin.editfaq', compact('faq', 'categories'));
     }
 
     public function update(Request $request, Faq $faq)

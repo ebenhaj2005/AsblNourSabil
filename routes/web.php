@@ -20,9 +20,11 @@ use App\Http\Controllers\CategoryController;
 
 
 
+Route::middleware([AdminMiddleware::class])->group(function () {
 
-// Admin Routes
-Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+Route::resource('categories', CategoryController::class);
+Route::prefix('admin')->group(function () {
+
     // Route to list all news items
     Route::get('/newsitems', [NewsController::class, 'index'])->name('newsitems');
 
@@ -41,13 +43,21 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     // Route to delete a news item
     Route::delete('/newsitems/{newsItem}', [NewsController::class, 'destroy'])->name('newsitems.destroy');
 });
+    
+    Route::resource('faqs', FaqController::class);
 
-Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
-
-Route::middleware(['auth', 'can:manage-faq'])->group(function () {
-    Route::resource('categories', CategoryController::class);
-    Route::resource('faqs', FaqController::class)->except(['index']);
 });
+
+
+
+
+
+
+// Admin Routes
+
+
+
+
 
 
 Route::post('register', [RegisteredUserController::class, 'store']);
@@ -78,8 +88,9 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/contact', [ContactController::class, 'showContactForm'])->name('contact');
+Route::get('/contact', [ContactController::class, 'showContactForm'],[FaqController::class, 'view'],[CategoryController::class,'view'])->name('contact');
 Route::post('/contact', [ContactController::class, 'submitContactForm'])->name('contact.submit');
+
 
 Route::get('/login', function () {
     return view('login');
