@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1>Create new Faq</h1>
-    <form action="{{ route('faqs.store') }}" method="POST">
+    <form action="{{ route('admin.faq.store') }}" method="POST">
         @csrf
         <div class="form-group">
             <label for="category_id">Category</label>

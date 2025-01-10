@@ -18,8 +18,8 @@
                     <li><a href="{{ route('admin.users.index') }}">Users</a></li>
                     <li><a href="{{ route('admin.users.create') }}">Create User</a></li>
                     <li><a href="{{ route('admin.newsitems.index') }}">News Items</a></li>
-                    <li><a href="{{ route('faqs.index') }}">All FAQ's</a></li>
-                <li><a href="{{ route('faqs.create') }}">New FAQ</a></li>
+                    <li><a href="{{ route('admin.faq.index') }}">All FAQ's</a></li>
+                <li><a href="{{ route('admin.faq.create') }}">New FAQ</a></li>
                 <li><a href="{{ route('categories.index') }}">Categories</a></li>
                 <li><a href="{{ route('categories.create') }}">New Category</a></li>
                     

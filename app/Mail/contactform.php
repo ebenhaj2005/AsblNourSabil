@@ -12,14 +12,14 @@ class contactform extends Mailable
 
     public $name;
     public $email;
-    public $message;
+    public $contactmessage;
 
 
-    public function __construct($name, $email, $message)
+    public function __construct($name, $email, $contactmessage)
     {
         $this->name = $name;
         $this->email = $email;
-        $this->message = $message;
+        $this->contactmessage = $contactmessage;
     }
 
     
@@ -31,7 +31,7 @@ class contactform extends Mailable
                     ->with([
                         'name' => $this->name,
                         'email' => $this->email,
-                        'message' => $this->message,
+                        'message' => $this->contactmessage,
                     ]);
     }
 }

@@ -1,29 +1,42 @@
+ 
 @extends('layouts.admin')
-
 @section('content')
-<div class="container">
-    <h1>Veelgestelde Vragen</h1>
-    @foreach($categories as $category)
-        <div class="faq-category">
-            <h2>{{ $category->name }}</h2>
-            @foreach($category->faqs as $faq)
-                <div class="faq-item">
-                    <p class="faq-question">{{ $faq->question }}</p>
-                    <div class="faq-answer" style="display: none;">
-                        {{ $faq->answer }}
-                    </div>
-                </div>
+<table>
+    <thead>
+        <tr>
+            <th>Question</th>
+            <th>Answer</th>
+            <th>Category</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($categories as $category)
+            @foreach ($category->faqs as $faq)
+                <tr>
+                    <td>{{ $faq->question }}</td>
+                    <td>{{ $faq->answer }}</td>
+                    <td>{{ $category->name }}</td>
+                    <td>
+                        <a href="{{ route('admin.faq.edit', $faq->id) }}" class="btn btn-primary">Edit</a>
+                        <form action="{{ route('admin.faq.destroy', $faq->id) }}" method="POST" style="display: inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this FAQ?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
             @endforeach
-        </div>
-    @endforeach
-</div>
-
-<script>
-    document.querySelectorAll('.faq-question').forEach(question => {
-        question.addEventListener('click', () => {
-            const answer = question.nextElementSibling;
-            answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
-        });
-    });
-</script>
+        @endforeach
+    </tbody>
+</table>
 @endsection
+
+<style>
+
+td{
+    padding: 10px;
+    border: 1px solid black;
+}
+
+</style>

@@ -2,7 +2,6 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/form.css') }}">
-
 @endsection
 
 @section('content')
@@ -30,7 +29,7 @@
     </div>
 
     <div class="form-group">
-        <label for="picture">Picture (Optional):</label>
+        <label for="image">Picture (Optional):</label>
         <input type="file" name="picture" class="form-control">
         @error('picture')
         <div class="error">{{ $message }}</div>
@@ -39,7 +38,7 @@
 
     <div class="form-group">
         <label for="publication_date">Publication Date:</label>
-        <input type="datetime-local" name="publication_date" value="{{ old('publication_date') }}" required class="form-control">
+        <input type="datetime-local" name="publication_date" value="{{ old('publication_date') ? \Carbon\Carbon::parse(old('publication_date'))->format('Y-m-d\TH:i') : '' }}" required class="form-control">
         @error('publication_date')
         <div class="error">{{ $message }}</div>
         @enderror
@@ -61,19 +60,19 @@
         </tr>
     </thead>
     <tbody>
-        @forelse($newsitems as $newsitem)
+        @forelse($newsitems as $newsItem)
         <tr>
-            <td>{{ $newsitem->title }}</td>
-            <td>{{ Str::limit($newsitem->content, 50) }}</td>
+            <td>{{ $newsItem->title }}</td>
+            <td>{{ Str::limit($newsItem->content, 50) }}</td>
             <td>
-                @if($newsitem->image)
-                <img src="{{ asset('storage/' . $newsitem->image) }}" alt="{{ $newsitem->title }}" width="100" class="img-thumbnail">
+                @if($newsItem->image)
+                <img src="{{ asset('storage/' . $newsItem->image) }}" alt="{{ $newsItem->title }}" width="100" class="img-thumbnail">
                 @endif
             </td>
-            <td>{{ \Carbon\Carbon::parse($newsitem->publication_date)->format('d-m-Y H:i') }}</td>
+            <td>{{ \Carbon\Carbon::parse($newsItem->publication_date)->format('d-m-Y H:i') }}</td>
             <td>
-                <a href="{{ route('admin.newsitems.edit', $newsitem->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                <form action="{{ route('admin.newsitems.destroy', $newsitem->id) }}" method="POST" style="display:inline;">
+                <a href="{{ route('admin.newsitems.edit', $newsItem->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                <form action="{{ route('admin.newsitems.destroy', $newsItem->id) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this news item?')">Delete</button>

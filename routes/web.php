@@ -10,34 +10,25 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\CategoryController;
-//Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-
-/*Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users');
-    Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
-    Route::patch('/admin/users/{id}/make-admin', [AdminController::class, 'makeAdmin'])->name('admin.makeAdmin');
-});*/
-
 
 
 
     // Resource routes for categories
     Route::resource('categories', CategoryController::class);
 
-    Route::prefix('admin')->group(function () {
-        // Resource route for faqs
-        Route::resource('faqs', FaqController::class);
-        
-        // Resource route for news items (this will automatically handle index, create, store, edit, update, destroy)
-        Route::resource('newsitems', NewsController::class);
+
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::get('/faq', [FaqController::class, 'index'])->name('faq.index'); // View all FAQs
+        Route::get('/faq/create', [FaqController::class, 'create'])->name('faq.create'); // Show form to create FAQ
+        Route::post('/faq', [FaqController::class, 'store'])->name('faq.store'); // Store new FAQ
+        Route::get('/faq/{id}/edit', [FaqController::class, 'edit'])->name('faq.edit'); // Show form to edit FAQ
+        Route::put('/faq/{id}', [FaqController::class, 'update'])->name('faq.update'); // Update FAQ
+        Route::delete('/faq/{id}', [FaqController::class, 'destroy'])->name('faq.destroy'); // Delete FAQ
     });
 
 
 
-
-
-
-
+ 
 
 // Admin Routes
 

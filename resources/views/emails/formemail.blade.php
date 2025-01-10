@@ -11,7 +11,10 @@
         <p><strong>Nom:</strong> {{ $name }}</p>
         <p><strong>Email:</strong> {{ $email }}</p>
 
-        <p><strong>Message:</strong> {{ $message}}</p>
+        <p><strong>Message:</strong></p>
+        <div class="message">
+    <p>{{ $contactmessage }}</p>
+</div>
        
 
         <div class="footer">

@@ -35,11 +35,12 @@ class FaqController extends Controller
         ]);
 
         Faq::create($request->all());
-        return redirect()->route('faqs.index')->with('success', 'FAQ created successfully.');
+        return redirect()->route('admin.faq.index')->with('success', 'FAQ created successfully.');
     }
 
-    public function edit(Faq $faq)
+    public function edit($id)
     {
+        $faq = Faq::findOrFail($id);
         $categories = Category::all();
         return view('admin.editfaq', compact('faq', 'categories'));
     }
@@ -53,12 +54,12 @@ class FaqController extends Controller
         ]);
 
         $faq->update($request->all());
-        return redirect()->route('faqs.index')->with('success', 'FAQ updated successfully.');
+        return redirect()->route('admin.faq.index')->with('success', 'FAQ updated successfully.');
     }
-
-    public function destroy(Faq $faq)
+    public function destroy($id)
     {
-        $faq->delete();
-        return redirect()->route('faqs.index')->with('success', 'FAQ deleted successfully.');
+        $faq = Faq::findOrFail($id); 
+        $faq->delete(); 
+        return redirect()->route('admin.faq.index')->with('success', 'FAQ deleted successfully!');
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\NewsItem;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth; // Make sure this is imported
 
 class NewsController extends Controller
 {
@@ -19,10 +20,12 @@ class NewsController extends Controller
         return view('admin.newsitems', compact('newsitems'));
     }
 
-    public function showUserNews(NewsItem $newsItem)
+    public function showUserNews()
     {
-        $newsItems = NewsItem::all(); 
-        return view('news', compact('newsItems'));
+        // If you want to show specific news for a user, you can filter like so
+        $userNewsItems = NewsItem::where('user_id', Auth::id())->get();
+
+        return view('news', compact('userNewsItems'));
     }
 
     // Admin: Form for creating a new news item
@@ -42,7 +45,7 @@ class NewsController extends Controller
             'publication_date' => 'required|date',
         ]);
     
-        // Get the authenticated user ID (if applicable)
+        // Get the authenticated user ID
         $userId = auth()->id();  // Get the ID of the currently authenticated user
     
         // Upload the image
@@ -76,36 +79,36 @@ class NewsController extends Controller
     // Admin: Update news item
     public function update(Request $request, NewsItem $newsItem)
     {
-        $user = Auth::user();
+        // Validate the form data
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'picture' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+            'content' => 'required',
+            'publication_date' => 'required|date',
+        ]);
 
-    // Update the user's basic information
-    $user->name = $request->input('name');
-    $user->surname = $request->input('surname');
-    $user->username = $request->input('username');
-    $user->bio = $request->input('bio');
-    $user->birthday = $request->input('birthday');
-    $user->visibility = $request->input('visibility');
+        // If a new image is uploaded, delete the old one and store the new one
+        if ($request->hasFile('picture')) {
+            // Delete the old image from storage if it exists
+            if ($newsItem->image && Storage::exists('public/' . $newsItem->image)) {
+                Storage::delete('public/' . $newsItem->image);
+            }
 
-    // Handle the profile picture upload
-    if ($request->hasFile('profile_picture')) {
-        // Delete the old profile picture from storage if it exists
-        if ($user->profile_picture && Storage::exists('public/' . $user->profile_picture)) {
-            Storage::delete('public/' . $user->profile_picture);
+            // Store the new image
+            $imagePath = $request->file('picture')->store('images', 'public');
+            $newsItem->image = $imagePath;
         }
 
-        // Store the new profile picture
-        $file = $request->file('profile_picture');
-        $path = $file->store('profile_pictures', 'public');
+        // Update the other fields
+        $newsItem->title = $validated['title'];
+        $newsItem->content = $validated['content'];
+        $newsItem->publication_date = $validated['publication_date'];
 
-        // Update the user's profile picture path in the database
-        $user->profile_picture = $path;
-    }
+        // Save the updated news item
+        $newsItem->save();
 
-    // Save the updated user details
-    $user->save();
-
-    // Redirect back to the profile edit page with a success message
-    return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        // Redirect with success message
+        return redirect()->route('admin.dashboard')->with('success', 'News item updated successfully!');
     }
 
     // Admin: Delete news item
