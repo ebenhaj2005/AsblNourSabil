@@ -20,33 +20,19 @@ use App\Http\Controllers\CategoryController;
 
 
 
-Route::middleware([AdminMiddleware::class])->group(function () {
 
-Route::resource('categories', CategoryController::class);
-Route::prefix('admin')->group(function () {
+    // Resource routes for categories
+    Route::resource('categories', CategoryController::class);
 
-    // Route to list all news items
-    Route::get('/newsitems', [NewsController::class, 'index'])->name('newsitems');
+    Route::prefix('admin')->group(function () {
+        // Resource route for faqs
+        Route::resource('faqs', FaqController::class);
+        
+        // Resource route for news items (this will automatically handle index, create, store, edit, update, destroy)
+        Route::resource('newsitems', NewsController::class);
+    });
 
-    // Route to create a new news item
-    Route::get('/newsitems/create', [NewsController::class, 'create'])->name('newsitems.create');
 
-    // Route to store a new news item
-    Route::post('/newsitems', [NewsController::class, 'store'])->name('newsitems.store');
-
-    // Route to edit a news item
-    Route::get('/newsitems/{newsItem}/edit', [NewsController::class, 'edit'])->name('newsitems.edit');
-
-    // Route to update a news item
-    Route::put('/newsitems/{newsItem}', [NewsController::class, 'update'])->name('newsitems.update');
-
-    // Route to delete a news item
-    Route::delete('/newsitems/{newsItem}', [NewsController::class, 'destroy'])->name('newsitems.destroy');
-});
-    
-    Route::resource('faqs', FaqController::class);
-
-});
 
 
 
@@ -56,23 +42,22 @@ Route::prefix('admin')->group(function () {
 // Admin Routes
 
 
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Resource route for managing news items
+    Route::resource('newsitems', NewsController::class);
+});
 
-
-
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Resource routes for users
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::resource('users', AdminController::class);
+});
 
 Route::post('register', [RegisteredUserController::class, 'store']);
 
-Route::post('/admin/makeAdmin/{id}', [AdminController::class, 'makeAdmin'])->name('admin.makeAdmin');
-Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users');
-Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
-Route::get('/admin/users/create', [AdminController::class, 'create'])->name('admin.users.create');
-Route::post('/admin/users', [AdminController::class, 'store'])->name('admin.users.store');
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->name('admin.dashboard');
-
-
+Route::get('/contact', [ContactController::class, 'showForm']);
+Route::post('/contact', [ContactController::class, 'submitForm']);
 // GOEDE ROUTES
 Route::get('/home', function () {
 
@@ -88,8 +73,9 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/contact', [ContactController::class, 'showContactForm'],[FaqController::class, 'view'],[CategoryController::class,'view'])->name('contact');
+Route::get('/contact', [ContactController::class, 'showContactForm'])->name('contact');
 Route::post('/contact', [ContactController::class, 'submitContactForm'])->name('contact.submit');
+Route::get('/contact', [FaqController::class, 'view'])->name('faq');
 
 
 Route::get('/login', function () {

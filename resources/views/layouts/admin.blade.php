@@ -14,16 +14,19 @@
             <h2>Admin Panel</h2>
             <nav>
                 <ul>
-                    <li><a href="admin/dashboard">Dashboard</a></li>
-                    <li><a href="admin/users">Users</a></li>
-                    <li><a href="admin/users/create">Create User</a></li>
-                    <li><a href="admin/newsitems">News Items</a></li>
+                    <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ route('admin.users.index') }}">Users</a></li>
+                    <li><a href="{{ route('admin.users.create') }}">Create User</a></li>
+                    <li><a href="{{ route('admin.newsitems.index') }}">News Items</a></li>
                     <li><a href="{{ route('faqs.index') }}">All FAQ's</a></li>
                 <li><a href="{{ route('faqs.create') }}">New FAQ</a></li>
                 <li><a href="{{ route('categories.index') }}">Categories</a></li>
                 <li><a href="{{ route('categories.create') }}">New Category</a></li>
                     
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </ul>
             </nav>
         </aside>

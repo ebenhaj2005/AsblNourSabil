@@ -58,7 +58,7 @@ class NewsController extends Controller
         ]);
     
         // Redirect with success message
-        return redirect()->route('admin.newsitems')->with('success', 'News item created successfully!');
+        return redirect()->route('admin.dashboard')->with('success', 'News item created successfully!');
     }
 
     // Admin: Show details of a news item
@@ -120,6 +120,6 @@ class NewsController extends Controller
         $newsItem->delete();
 
         // Redirect with success message
-        return redirect()->route('admin.newsitems')->with('success', 'News item deleted successfully!');
+        return redirect()->route('admin.dashboard')->with('success', 'News item deleted successfully!');
     }
 }

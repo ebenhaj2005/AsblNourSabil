@@ -12,33 +12,37 @@ class AdminController extends Controller
         return view('admin.users', compact('users'));
         
     }
+    public function dashboard()
+    {
+        return view('admin.dashboard');
+    }
 
-    public function deleteUser($id)
+    public function destroy($id)
     {
         $user = User::find($id);
 
         if (!$user) {
-            return redirect()->route('admin.users')->with('error', 'User not found.');
+            return redirect()->route('admin.dashboard')->with('error', 'User not found.');
         }
 
         $user->delete();
-        return redirect()->route('admin.users')->with('success', 'User deleted successfully.');
+        return redirect()->route('admin.dashboard')->with('success', 'User deleted successfully.');
     }
-    public function makeAdmin($id)
+    public function update($id)
     {
         $user = User::find($id);
 
         if (!$user) {
-            return redirect()->route('admin.users')->with('error', 'User not found.');
+            return redirect()->route('admin.dashboard')->with('error', 'User not found.');
         }
 
         if (!$user->name) {
-            return redirect()->route('admin.users')->with('error', 'User must have a name.');
+            return redirect()->route('admin.dashboard')->with('error', 'User must have a name.');
         }
         
         $user->role = 'admin';
         $user->save();
-        return redirect()->route('admin.users')->with('success', 'User promoted to admin.');
+        return redirect()->route('admin.dashboard')->with('success', 'User promoted to admin.');
     }
 
     
@@ -70,6 +74,7 @@ class AdminController extends Controller
     
             return redirect()->route('admin.dashboard')->with('success', 'User created successfully.');
         }
+
     }
     
     

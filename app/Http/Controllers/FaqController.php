@@ -11,12 +11,12 @@ class FaqController extends Controller
 {
     public function view()
     {
-         $categories = Category::with('faqs')->get(); 
+        $categories = Category::with('faqs')->get(); 
         return view('contact', compact('categories'));
     }
     public function index()
     {
-      
+        $categories = Category::all();
         return view('admin.faq', compact('categories'));
     }
 

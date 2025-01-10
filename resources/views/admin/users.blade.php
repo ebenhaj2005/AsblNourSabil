@@ -36,15 +36,19 @@
                                 <td>{{ $user->role === 'admin' ? 'Admin' : 'User' }}</td>
                                 <td class="d-flex justify-content-between">
                                     <div class="mr-2">
-                                        <form action="{{ route('admin.deleteUser', $user->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?')">
+                                        <!-- Delete User -->
+                                        <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?')">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                         </form>
                                     </div>
                                     <div>
-                                        <form action="{{ route('admin.makeAdmin', $user->id) }}" method="POST">
+                                        <!-- Make User Admin -->
+                                        <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
                                             @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="role" value="admin">
                                             <button type="submit" class="btn btn-primary btn-sm">Make Admin</button>
                                         </form>
                                     </div>
@@ -117,7 +121,6 @@
         border-color: #007bff;
         margin-right: 10px;
         margin-bottom: 10px;    
-
     }
 
     .btn-primary:hover {
