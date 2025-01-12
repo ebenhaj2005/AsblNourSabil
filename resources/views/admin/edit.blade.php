@@ -8,12 +8,12 @@
 <h2 id="editnews">Edit News Item</h2>
 
 <!-- Edit News Item Form -->
-<form action="{{ route('admin.newsitems.update', $newsItem) }}" method="POST" enctype="multipart/for
+<form action="{{ route('admin.newsitems.update', $newsItem) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     
     <label for="title">Title:</label>
-    <input type="text" name="title" value="{{ old('title', $newsItem->id) }}" required>
+    <input type="text" name="title" value="{{ old('title', $newsItem->title) }}" required>
     @error('title')
     <div class="error">{{ $message }}</div>
     @enderror

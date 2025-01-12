@@ -13,7 +13,7 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
@@ -53,7 +53,6 @@
         <x-input-error class="mt-2" :messages="$errors->get('birthday')" />
     </div>
 
-    <!-- Profile Picture -->
     <div>
         <x-input-label for="profile_picture" :value="__('Profile Picture')" />
         <input id="profile_picture" name="profile_picture" type="file" class="mt-1 block w-full" accept="image/*" />
@@ -116,3 +115,130 @@
         </div>
     </form>
 </section>
+<style>
+    <style>
+/* General Form Styling */
+form {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Header */
+header h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+header p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Labels */
+label {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="email"],
+input[type="date"],
+textarea,
+select,
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+    outline: none;
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+/* Radio Buttons */
+input[type="radio"] {
+    accent-color: #4CAF50;
+}
+
+/* Buttons */
+button,
+.x-primary-button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover,
+.x-primary-button:hover {
+    background-color: #45a049;
+}
+
+/* Error Messages */
+.x-input-error {
+    color: #dc3545;
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+/* Flex Containers */
+.flex {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.flex.items-center.gap-4 {
+    margin-top: 20px;
+    justify-content: space-between;
+}
+
+/* Success Message */
+.text-green-600 {
+    color: #28a745;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    form {
+        padding: 15px;
+    }
+
+    header h2 {
+        font-size: 1.3rem;
+    }
+
+    button,
+    .x-primary-button {
+        width: 100%;
+    }
+}
+</style>

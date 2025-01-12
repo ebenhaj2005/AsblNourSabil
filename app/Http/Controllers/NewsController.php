@@ -22,10 +22,11 @@ class NewsController extends Controller
 
     public function showUserNews()
     {
-        // If you want to show specific news for a user, you can filter like so
-        $userNewsItems = NewsItem::where('user_id', Auth::id())->get();
+        $newsItems = NewsItem::all();
 
-        return view('news', compact('userNewsItems'));
+  
+
+        return view('news', compact('newsItems'));
     }
 
     // Admin: Form for creating a new news item
@@ -79,6 +80,8 @@ class NewsController extends Controller
     // Admin: Update news item
     public function update(Request $request, NewsItem $newsItem)
     {
+        
+ 
         // Validate the form data
         $validated = $request->validate([
             'title' => 'required|max:255',

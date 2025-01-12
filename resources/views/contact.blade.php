@@ -64,7 +64,7 @@
 
 
 <div class="container">
-    <h1>Veelgestelde Vragen</h1>
+    <h1>F.A.Q</h1>
     @foreach($categories as $category)
         <div class="faq-category">
             <h2>{{ $category->name }}</h2>

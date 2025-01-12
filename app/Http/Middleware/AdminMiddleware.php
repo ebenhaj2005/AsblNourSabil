@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\User; // Import the User model
 
 class AdminMiddleware
 {
@@ -16,12 +17,12 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        
+ 
         if (auth()->check() && auth()->user()->role == User::ROLE_ADMIN) {
             return $next($request);
         }
 
         
-        return redirect('home')->with('error', 'Access denied. Admins only.');
+        return redirect('home')->with('alert', 'error', 'Access denied. Admins only.');
     }
 }

@@ -10,90 +10,112 @@ body {
     background-color: #f4f7fc;
     color: #333;
     line-height: 1.6;
-
 }
 
 /* Main Container */
 .news-list {
-    display: flex;
-    flex-direction: column; /* Verticaal weergeven zoals Instagram */
-    gap: 30px; /* Grotere ruimte tussen de nieuwsitems */
-    align-items: center; /* Center the content */
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
+    gap: 20px; /* Space between news items */
     padding: 20px;
+    max-width: 1200px; /* Limit container width */
+    margin: 0 auto; /* Center the container */
 }
 
 /* News Item */
 .news-item {
-    margin-top: 20px;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    width: 100%; /* Breedte van de nieuwsitems */
-    max-width: 80%; /* Verhoogde breedte van de nieuwsitems */
-    /* Maximale hoogte van de nieuwsitems */
     transition: transform 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center content */
-    padding: 20px;
+    padding: 15px; /* Reduce padding */
 }
 
-/* Hover Effect */
 .news-item:hover {
     transform: translateY(-10px);
 }
 
 /* Title */
 .news-item h2 {
-    font-size: 2.5rem; /* Grotere titel */
-    margin: 20px 0;
+    font-size: 1.8rem; /* Adjust title size */
+    margin: 10px 0;
     color: #333;
     text-align: center;
     font-weight: bold;
-text-transform: uppercase;
+    text-transform: uppercase;
 }
 
 /* Image */
-.news-item-img {
-    width: 100%; /* Breedte van de afbeelding aanpassen aan het nieuwsitem */
-    height: 200px; /* Bepaalde hoogte voor de afbeelding */
-    object-fit: cover; /* Zorgt ervoor dat de afbeelding niet vervormt */
+.news-item img {
+    width: 100%; /* Adjust image width */
+    height: 180px; /* Slightly smaller image height */
+    object-fit: cover; /* Maintain aspect ratio without distortion */
     border-radius: 8px;
-    margin: 15px 0;
+    margin: 10px 0;
 }
 
 /* Content */
 .news-item p {
-    padding: 50px; /* Meer ruimte rond de tekst */
-    font-size: 1.1rem;
+    font-size: 1rem; /* Slightly smaller text */
     color: #555;
     text-align: center;
     line-height: 1.6;
+    margin: 10px 0; /* Add spacing */
 }
 
 /* Date */
 .news-item small {
-    display: block;
-    padding: 10px;
-    font-size: 1rem;
+    font-size: 0.9rem; /* Smaller font size for date */
     color: #888;
     text-align: center;
+    margin-top: 10px;
 }
 
-/* Hover Effects for Read More Links */
+/* Read More Links */
 .news-item a {
     display: block;
     text-align: center;
-    padding: 12px;
+    padding: 10px;
     background-color: #007BFF;
     color: white;
     text-decoration: none;
     border-radius: 4px;
-    margin: 15px 0;
+    margin: 10px 0;
     transition: background-color 0.3s ease;
 }
 
 .news-item a:hover {
     background-color: #0056b3;
+}
+.lightbox {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.lightbox-img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

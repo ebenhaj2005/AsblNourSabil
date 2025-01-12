@@ -20,13 +20,10 @@
                     <li><a href="{{ route('admin.newsitems.index') }}">News Items</a></li>
                     <li><a href="{{ route('admin.faq.index') }}">All FAQ's</a></li>
                 <li><a href="{{ route('admin.faq.create') }}">New FAQ</a></li>
-                <li><a href="{{ route('categories.index') }}">Categories</a></li>
-                <li><a href="{{ route('categories.create') }}">New Category</a></li>
+                <li><a href="{{ route('admin.categories.index') }}">Categories</a></li>
+                <li><a href="{{ route('admin.categories.create') }}">New Category</a></li>
                     
-                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
+                  <li><a href="{{ route('home') }}">Back To Home Page</a> </li>
                 </ul>
             </nav>
         </aside>

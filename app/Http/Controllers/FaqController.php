@@ -47,15 +47,26 @@ class FaqController extends Controller
 
     public function update(Request $request, Faq $faq)
     {
-        $request->validate([
-            'question' => 'required',
-            'answer' => 'required',
+        // Validate the form data
+        $validated = $request->validate([
+            'question' => 'required|max:255',
+            'answer' => 'required|string',
             'category_id' => 'required|exists:categories,id',
         ]);
-
-        $faq->update($request->all());
-        return redirect()->route('admin.faq.index')->with('success', 'FAQ updated successfully.');
+    
+        // Update the fields
+        $faq->question = $validated['question'];
+        $faq->answer = $validated['answer'];
+        $faq->category_id = $validated['category_id'];
+    
+        // Save the updated FAQ
+        $faq->save();
+    
+        // Redirect with success message
+        return redirect()->route('admin.faq.index')->with('success', 'FAQ updated successfully!');
     }
+    
+
     public function destroy($id)
     {
         $faq = Faq::findOrFail($id); 

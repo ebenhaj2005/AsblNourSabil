@@ -22,28 +22,44 @@ class AdminController extends Controller
         $user = User::find($id);
 
         if (!$user) {
-            return redirect()->route('admin.dashboard')->with('error', 'User not found.');
+            return redirect()->route('admin.users.index')->with('error', 'User not found.');
         }
 
         $user->delete();
-        return redirect()->route('admin.dashboard')->with('success', 'User deleted successfully.');
+        return redirect()->route('admin.users.index')->with('success', 'User deleted successfully.');
     }
-    public function update($id)
-    {
-        $user = User::find($id);
+    public function update(Request $request, $id)
+{
 
-        if (!$user) {
-            return redirect()->route('admin.dashboard')->with('error', 'User not found.');
-        }
+    $user = User::find($id);
 
-        if (!$user->name) {
-            return redirect()->route('admin.dashboard')->with('error', 'User must have a name.');
-        }
-        
-        $user->role = 'admin';
-        $user->save();
-        return redirect()->route('admin.dashboard')->with('success', 'User promoted to admin.');
+
+    if (!$user) {
+        return redirect()->route('admin.users.index')->with('error', 'User not found.');
     }
+
+
+    if (!$user->name) {
+        return redirect()->route('admin.users.index')->with('error', 'User must have a name.');
+    }
+
+
+    $role = $request->input('role');
+    if (!in_array($role, ['admin', 'user'])) {
+        return redirect()->route('admin.users.index')->with('error', 'Invalid role selected.');
+    }
+
+
+    $user->role = $role;
+    $user->save();
+
+
+    $message = $role === 'admin' 
+        ? 'User promoted to admin.' 
+        : 'User demoted to regular user.';
+
+    return redirect()->route('admin.users.index')->with('success', $message);
+}
 
     
   
@@ -72,7 +88,7 @@ class AdminController extends Controller
                 'role' => $request->role,
             ]);
     
-            return redirect()->route('admin.dashboard')->with('success', 'User created successfully.');
+            return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
         }
 
     }

@@ -338,3 +338,36 @@ color:#8fc93c;
 #bio2{
     color : red;
 }
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out;
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-left {
+    transform: translateX(-100px);
+    opacity: 0;
+    transition: all 0.8s ease-out;
+}
+
+.reveal-right {
+    transform: translateX(100px);
+    opacity: 0;
+    transition: all 0.8s ease-out;
+}
+
+.scroll-reveal.revealed.reveal-left {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.scroll-reveal.revealed.reveal-right {
+    transform: translateX(0);
+    opacity: 1;
+}

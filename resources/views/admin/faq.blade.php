@@ -33,10 +33,72 @@
 @endsection
 
 <style>
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-td{
-    padding: 10px;
-    border: 1px solid black;
+thead {
+    background-color: #4CAF50;
+    color: white;
+    text-align: left;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+
+
+th {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+td a.btn {
+    text-decoration: none;
+    padding: 8px 12px;
+    margin: 0 5px;
+    border-radius: 4px;
+    font-size: 14px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+}
+
+td a.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    margin-bottom: 5px;
+}
+
+td a.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+td button.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+td button.btn-danger:hover {
+    background-color: #a71d2a;
 }
 
 </style>

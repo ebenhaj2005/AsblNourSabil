@@ -34,6 +34,7 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->role === 'admin' ? 'Admin' : 'User' }}</td>
+
                                 <td class="d-flex justify-content-between">
                                     <div class="mr-2">
                                         <!-- Delete User -->
@@ -44,15 +45,21 @@
                                         </form>
                                     </div>
                                     <div>
-                                        <!-- Make User Admin -->
+                                        <!-- Change Role -->
                                         <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
                                             @csrf
                                             @method('PUT')
-                                            <input type="hidden" name="role" value="admin">
-                                            <button type="submit" class="btn btn-primary btn-sm">Make Admin</button>
+                                            @if ($user->role === 'admin')
+                                                <!-- Demote Admin to User -->
+                                                <input type="hidden" name="role" value="user">
+                                                <button type="submit" class="btn btn-warning btn-sm">Make User</button>
+                                            @else
+                                                <!-- Promote User to Admin -->
+                                                <input type="hidden" name="role" value="admin">
+                                                <button type="submit" class="btn btn-primary btn-sm">Make Admin</button>
+                                            @endif
                                         </form>
                                     </div>
-                              
                                 </td>
                             </tr>
                         @endforeach
@@ -126,6 +133,19 @@
     .btn-primary:hover {
         background-color: #0056b3;
         border-color: #004085;
+    }
+
+    .btn-warning {
+        color: #fff;
+        background-color: #ffc107;
+        border-color: #ffc107;
+        margin-right: 10px;
+        margin-bottom: 10px;    
+    }
+
+    .btn-warning:hover {
+        background-color: #e0a800;
+        border-color: #d39e00;
     }
 
     .alert-success {

@@ -10,82 +10,71 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Middleware\AdminMiddleware;
 
+//Admin routes
 
-
-    // Resource routes for categories
-    Route::resource('categories', CategoryController::class);
-
-
-    Route::prefix('admin')->name('admin.')->group(function () {
-        Route::get('/faq', [FaqController::class, 'index'])->name('faq.index'); // View all FAQs
-        Route::get('/faq/create', [FaqController::class, 'create'])->name('faq.create'); // Show form to create FAQ
-        Route::post('/faq', [FaqController::class, 'store'])->name('faq.store'); // Store new FAQ
-        Route::get('/faq/{id}/edit', [FaqController::class, 'edit'])->name('faq.edit'); // Show form to edit FAQ
-        Route::put('/faq/{id}', [FaqController::class, 'update'])->name('faq.update'); // Update FAQ
-        Route::delete('/faq/{id}', [FaqController::class, 'destroy'])->name('faq.destroy'); // Delete FAQ
-    });
-
-
-
+Route::middleware([AdminMiddleware::class])->prefix('admin')->name('admin.')->group(function () {
+Route::resource('newsitems', NewsController::class);
+Route::resource('users', AdminController::class);
+Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
+Route::get('/faq/create', [FaqController::class, 'create'])->name('faq.create'); 
+Route::post('/faq', [FaqController::class, 'store'])->name('faq.store');
+Route::get('/faq/{id}/edit', [FaqController::class, 'edit'])->name('faq.edit'); 
+Route::put('/faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
+Route::delete('/faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy'); 
+Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+Route::resource('categories', CategoryController::class);
+Route::get('/newsitems/{newsItem}/edit', [NewsController::class, 'edit'])->name('newsitems.edit');
+Route::put('/newsitems/{newsItem}', [NewsController::class, 'update'])->name('newsitems.update');
+Route::delete('/newsitems/{newsItem}', [NewsController::class, 'destroy'])->name('newsitems.destroy');
+});
+   
  
+//User routes
+Route::middleware('auth')->group(function () {
+Route::get('/account', [AccountController::class, 'showProfile']);
+Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-// Admin Routes
-
-
-Route::prefix('admin')->name('admin.')->group(function () {
-    // Resource route for managing news items
-    Route::resource('newsitems', NewsController::class);
 });
 
-Route::prefix('admin')->name('admin.')->group(function () {
-    // Resource routes for users
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::resource('users', AdminController::class);
-});
-
+//Public routes
 Route::post('register', [RegisteredUserController::class, 'store']);
-
-
 Route::get('/contact', [ContactController::class, 'showForm']);
 Route::post('/contact', [ContactController::class, 'submitForm']);
-// GOEDE ROUTES
-Route::get('/home', function () {
-
-    return view('home');
-
-})->name('home');
-
 Route::get('/news', [NewsController::class, 'showUserNews'])->name('news.index');
-
-
-
-Route::get('/', function () {
-    return view('home');
-});
-
 Route::get('/contact', [ContactController::class, 'showContactForm'])->name('contact');
 Route::post('/contact', [ContactController::class, 'submitContactForm'])->name('contact.submit');
 Route::get('/contact', [FaqController::class, 'view'])->name('faq');
+Route::get('/user/{username}', [ProfileController::class, 'showPublicProfile']);
+Route::get('/home', [ProfileController::class, 'home']) ->name('home');
+Route::get('/register', [ProfileController::class, 'register'])     ->name('register');
+Route::get('/login', [ProfileController::class, 'login'])     ->name('login');
+// GOEDE ROUTES
+
+
+
+
+
+
+
+
+
 
 
 Route::get('/login', function () {
     return view('login');
 })->name('login');
-Route::get('/user/{username}', [ProfileController::class, 'showPublicProfile']);
 
 
 
-Route::get('/account', [AccountController::class, 'showProfile'])->middleware('auth');
     
-Route::get('/register', function () {
-    return view('register');
-})->name('register');
+
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+   
 
 });
 
