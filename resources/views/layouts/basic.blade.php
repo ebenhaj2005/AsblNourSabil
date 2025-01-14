@@ -121,7 +121,7 @@
     <hr id="lasthr">
     <div id="copyright">
     <?php
-echo "© " . date("Y") . " ASBL Nour Sabil. All rights reserved.";
+echo "© " . date("Y") . " ASBL Nour Sabil. All rights reserved | Created by <a  href='https://www.linkedin.com/in/elias-benhaj-b4b022292/' target=\"_blank\" rel=\"noopener noreferrer\">Elias Benhaj</a>";
 ?>
 </div>
 </body>
