@@ -62,7 +62,7 @@ class NewsController extends Controller
         ]);
     
         // Redirect with success message
-        return redirect()->route('admin.dashboard')->with('success', 'News item created successfully!');
+        return redirect()->route('admin.newsitems.index')->with('success', 'News item created successfully!');
     }
 
     // Admin: Show details of a news item
@@ -72,16 +72,16 @@ class NewsController extends Controller
     }
 
     // Admin: Edit news item
-    public function edit(NewsItem $newsItem)
+    public function edit($id)
     {
+        $newsItem = NewsItem::findOrFail($id);
         return view('admin.edit', compact('newsItem'));
     }
 
     // Admin: Update news item
-    public function update(Request $request, NewsItem $newsItem)
+    public function update(Request $request, $id)
     {
-        
- 
+        $newsItem = NewsItem::findOrFail($id);
         // Validate the form data
         $validated = $request->validate([
             'title' => 'required|max:255',
@@ -89,34 +89,36 @@ class NewsController extends Controller
             'content' => 'required',
             'publication_date' => 'required|date',
         ]);
-
-        // If a new image is uploaded, delete the old one and store the new one
+    
+        // Check if a new image is uploaded
         if ($request->hasFile('picture')) {
-            // Delete the old image from storage if it exists
+        
+            // Delete the old image if it exists
             if ($newsItem->image && Storage::exists('public/' . $newsItem->image)) {
                 Storage::delete('public/' . $newsItem->image);
             }
-
-            // Store the new image
+    
+            // Upload the new image
             $imagePath = $request->file('picture')->store('images', 'public');
             $newsItem->image = $imagePath;
         }
-
-        // Update the other fields
+    
+        // Update other fields
         $newsItem->title = $validated['title'];
         $newsItem->content = $validated['content'];
         $newsItem->publication_date = $validated['publication_date'];
-
+    
         // Save the updated news item
         $newsItem->save();
-
+    
         // Redirect with success message
-        return redirect()->route('admin.dashboard')->with('success', 'News item updated successfully!');
+        return redirect()->route('admin.newsitems.index')->with('success', 'News item updated successfully!');
     }
 
     // Admin: Delete news item
-    public function destroy(NewsItem $newsItem)
+    public function destroy($id)
     {
+        $newsItem = NewsItem::findOrFail($id);
         // Delete the image from storage if it exists
         if ($newsItem->image && Storage::exists('public/' . $newsItem->image)) {
             Storage::delete('public/' . $newsItem->image);
@@ -126,6 +128,6 @@ class NewsController extends Controller
         $newsItem->delete();
 
         // Redirect with success message
-        return redirect()->route('admin.dashboard')->with('success', 'News item deleted successfully!');
+        return redirect()->route('admin.newsitems.index')->with('success', 'News item deleted successfully!');
     }
 }

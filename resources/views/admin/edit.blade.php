@@ -8,7 +8,7 @@
 <h2 id="editnews">Edit News Item</h2>
 
 <!-- Edit News Item Form -->
-<form action="{{ route('admin.newsitems.update', $newsItem) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('admin.newsitems.update', $newsItem->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     

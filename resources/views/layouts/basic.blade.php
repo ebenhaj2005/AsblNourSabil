@@ -26,7 +26,7 @@
 
 <div class="header" >
 
-        <img id='logo' src="{{ asset('images/images (1).jpg') }}" alt="logo" width="100px">
+        <img id='logo' src="{{ asset('images/Logo.png') }}" alt="logo" width="100px">
 
 
        
@@ -77,7 +77,7 @@
 
    <footer>
     <div id="footer-logo">
-        <img src="{{ asset('images/images (1).jpg') }}" alt="logo" width="100px">
+        <img id="logo" src="{{ asset('images/Logo.png') }}" alt="logo" width="100px">
         <h1>ASBL NOUR SABIL</h1>
        
     </div>
