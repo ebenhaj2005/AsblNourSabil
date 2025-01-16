@@ -13,6 +13,10 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Middleware\AdminMiddleware;
 
 //Admin routes
+Route::get('/', function () {
+    return view('home');
+});
+
 
 Route::middleware([AdminMiddleware::class])->prefix('admin')->name('admin.')->group(function () {
 Route::resource('newsitems', NewsController::class);
@@ -64,9 +68,7 @@ Route::get('/login', [ProfileController::class, 'login'])     ->name('login');
 
 
 
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
+
 
 
 
