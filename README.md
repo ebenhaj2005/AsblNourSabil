@@ -69,8 +69,8 @@ This project serves as a dynamic website designed for a non-profit organization.
    - Admins receive emails with form details.
 
 ### Additional Features
-- Admins can view and manage all submitted contact forms in an admin panel.
-- Basic validation for all user inputs.
+- Users can choose if they  show their username or their name and lastname ont their public profile picture
+
 
 ## Installation
 
@@ -85,26 +85,26 @@ Ensure the following software is installed on your system:
 - A database server such as MySQL or PostgreSQL
 
 ### Steps to Install Locally
-1. **Clone the repository:**
+## Clone the repository:
 
    git clone https://github.com/ebenhaj2005/AsblNourSabil.git
    cd AsblNourSabil
 
-2.**Install PHP dependencies using Composer:**
+## Install PHP dependencies using Composer:
   composer install
   
-3.**Install JavaScript dependencies using NPM or Yarn:**
+## Install JavaScript dependencies using NPM or Yarn:
 
   npm install
   
-4.**Copy the .env file:**
+## Copy the .env file:
 
   cp .env.example .env
   
-5.**Configure the .env file with your database credentials:**
+## Configure the .env file with your database credentials:
 
 Open the .env file and modify the following lines:
-
+```bash
   DB_CONNECTION=mysql
   
   DB_HOST=127.0.0.1
@@ -116,8 +116,8 @@ Open the .env file and modify the following lines:
   DB_USERNAME=your_database_user
   
   DB_PASSWORD=your_database_password
-  
-6.**Generate the application key:**
+  ````
+## Generate the application key:
 
 
 php artisan key:generate
