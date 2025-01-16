@@ -49,7 +49,7 @@ This project serves as a dynamic website designed for a non-profit organization.
      - Birthday
      - Profile photo (stored on the server)
      - "About Me" text
-
+#### To acces to the public profile add /users/{username of user you want to search} 
 3. **News Management**
    - Admins can create, edit, and delete news items.
    - Visitors can view a list of news items and their details.
