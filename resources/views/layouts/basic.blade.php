@@ -86,16 +86,16 @@
         <div class="pagedesc">
            
           
-         <h1 > <a id="desctitle" href="/home">Accueil</a></h1>
-            <p><a href="/home">Faire un don</a></p>
-            <p><a href="/home">Nos Services</a></p>
-            <p><a href="/home">Newsletter</a></p>
+         <h1 > <a id="desctitle" href="{{ route('home') }}">Accueil</a></h1>
+            <p><a href="{{ route('home') }}">Faire un don</a></p>
+            <p><a href="{{ route('home') }}">Nos Services</a></p>
+            <p><a href="{{ route('home') }}">Newsletter</a></p>
         </div>
         <div class="pagedesc">
-            <h1> <a id="desctitle" href="/galerie">Galerie</a></h1>
-            <p><a href="/galerie">Puits</a></p>
-            <p><a href="/galerie">Ecoles</a></p>
-            <p><a href="/galerie">Newsletter</a></p>
+            <h1> <a id="desctitle" href="{{ route('news.index') }}">Nouveautés</a></h1>
+            <p><a href="{{ route('news.index') }}">Puits</a></p>
+            <p><a href="{{ route('news.index') }}">Ecoles</a></p>
+            <p><a href="{{ route('news.index') }}">Newsletter</a></p>
   
 
         </div>
@@ -103,16 +103,16 @@
            
            <h1> <a id="desctitle" href="/contact">Contact</a></h1>
             <p><a href="/contact">Membres</a></p>
-            <p><a href="/contact">Reseaux Sociaux</a></p>
+            <p><a href="/contact">Faq</a></p>
             <p><a href="/contact">Newsletter</a></p>
 
         </div>
         <div class="pagedesc">
            
-           <h1> <a id="desctitle" href="/account">Account</a></h1>
-            <p><a href="/account">textetxte</a></p>
-            <p><a href="/account">textetxte</a></p>
-            <p><a href="/account">textetxte</a></p>
+           <h1> <a id="desctitle" href="{{ route('account.showProfile') }}">Account</a></h1>
+            <p><a href="{{ route('account.showProfile') }}">Personal Information</a></p>
+            <p><a href="{{ route('account.showProfile') }}">Password</a></p>
+            <p><a href="{{ route('account.showProfile') }}">Logout</a></p>
 
         </div>
 
@@ -126,3 +126,7 @@ echo "© " . date("Y") . " ASBL Nour Sabil. All rights reserved | Created by <a 
 </div>
 </body>
 </html>
+
+       
+    
+

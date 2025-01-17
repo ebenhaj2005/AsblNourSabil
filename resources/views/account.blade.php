@@ -11,7 +11,7 @@
     <h1 id="accountname">{{ Auth::user()->name }} {{ Auth::user()->surname }}</h1>
     <div id="profile-picture-container">
         <img id="accountusername" 
-             src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : asset('images/default-profile.jpg') }}" 
+             src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : asset('images/nopf.webp') }}" 
              alt="Profile Picture" 
              class="rounded-full w-32 h-32 object-cover">
     </div>
