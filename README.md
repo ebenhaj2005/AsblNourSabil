@@ -19,7 +19,6 @@ This is a Laravel-based project built to meet the requirements of a dynamic data
   - [Steps to Install Locally](#steps-to-install-locally)
   - [Running the Application](#running-the-application)
 - [Usage](#usage)
-- [License](#license)
 - [Acknowledgements](#acknowledgements)
 
 ## Project Description
@@ -49,7 +48,7 @@ This project serves as a dynamic website designed for a non-profit organization.
      - Birthday
      - Profile photo (stored on the server)
      - "About Me" text
-#### To acces to the public profile add /users/{username of user you want to search} 
+#### To acces to the public profile add /users/{username of the user you want to search} 
 3. **News Management**
    - Admins can create, edit, and delete news items.
    - Visitors can view a list of news items and their details.
@@ -67,6 +66,7 @@ This project serves as a dynamic website designed for a non-profit organization.
 5. **Contact Page**
    - Visitors can submit a contact form.
    - Admins receive emails with form details.
+     
 
 ### Additional Features
 - Users can choose if they  show their username or their name and lastname ont their public profile picture
@@ -150,14 +150,11 @@ Password: **Password!321**
 
 Explore the features, such as managing news, FAQs, and contact forms.
 
-# License
-
-This project is open-source and licensed under the MIT License. See the LICENSE file for details.
 
 # Acknowledgements
 
 Laravel documentation for framework usage.
-Chatgpt
+Chatgpt for error fixing and css for the admin page.
 
 Online resources referenced in the code are credited within comments.
 
